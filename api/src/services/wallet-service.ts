@@ -1,5 +1,5 @@
 // Wallet Service: Manage user savings, wallet ledger, and transactions
-import { supabaseAdmin, supabaseClient } from "./supabase";
+import { supabaseAdmin, supabaseClient } from "./supabase.js";
 
 type Wallet = any;
 type WalletTransaction = any;
