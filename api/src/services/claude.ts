@@ -86,7 +86,7 @@ Format as JSON:
 `;
 
     try {
-      const message = await this.client.messages.create({
+      const message = await (this.client as any).messages.create({
         model: "claude-3-5-sonnet-20241022",
         max_tokens: 500,
         messages: [
@@ -152,7 +152,7 @@ Respond with JSON:
 `;
 
     try {
-      const message = await this.client.messages.create({
+      const message = await (this.client as any).messages.create({
         model: "claude-3-5-sonnet-20241022",
         max_tokens: 200,
         messages: [
@@ -223,7 +223,7 @@ Generate 3 specific, actionable financial recommendations:
 Format as JSON array of strings.
 `;
 
-      const message = await this.client.messages.create({
+      const message = await (this.client as any).messages.create({
         model: "claude-3-5-sonnet-20241022",
         max_tokens: 300,
         messages: [
@@ -348,7 +348,7 @@ Generate ONE sentence that:
 Keep it under 20 words. Format as plain text (no JSON).
 `;
 
-      const message = await this.client.messages.create({
+      const message = await (this.client as any).messages.create({
         model: "claude-3-5-sonnet-20241022",
         max_tokens: 100,
         messages: [

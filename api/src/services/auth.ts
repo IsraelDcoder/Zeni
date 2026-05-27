@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { supabaseAdmin } from "./supabase.js";
 import { User, AuthResponse } from "../types/index.js";
+import type { SignOptions } from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const JWT_EXPIRY = process.env.JWT_EXPIRY || "24h";
@@ -27,9 +28,9 @@ export const createToken = (userId: string, email: string): string => {
     },
     JWT_SECRET,
     {
-      expiresIn: JWT_EXPIRY,
+      expiresIn: JWT_EXPIRY as string | number,
       algorithm: "HS256",
-    }
+    } as SignOptions
   );
 };
 
@@ -121,10 +122,10 @@ export const signIn = async (
   password: string
 ): Promise<AuthResponse> => {
   // Authenticate with Supabase
-  const { data: authData, error: authError } = await supabaseAdmin.auth.admin.signInWithPassword(
+  const { data: authData, error: authError } = await supabaseAdmin.auth.signInWithPassword({
     email,
-    password
-  );
+    password,
+  });
 
   if (authError || !authData.user || !authData.session) {
     throw new Error(`Signin failed: ${authError?.message || "Invalid credentials"}`);

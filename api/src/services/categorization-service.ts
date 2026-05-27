@@ -51,7 +51,7 @@ export class TransactionCategorizationService {
     try {
       const prompt = this._buildCategorizationPrompt(transaction);
 
-      const message = await this.client.messages.create({
+      const message = await (this.client as any).messages.create({
         model: "claude-3-5-sonnet-20241022",
         max_tokens: 256,
         messages: [

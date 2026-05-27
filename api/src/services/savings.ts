@@ -76,6 +76,10 @@ class SavingsService {
       throw new Error(`Failed to create savings goal: ${error.message}`);
     }
 
+    if (!data || !data[0]) {
+      throw new Error("Failed to create savings goal: no data returned");
+    }
+
     return this.formatGoal(data[0]);
   }
 
@@ -128,6 +132,10 @@ class SavingsService {
       throw new Error(`Failed to update goal: ${error.message}`);
     }
 
+    if (!data || !data[0]) {
+      throw new Error("Failed to update goal: no data returned");
+    }
+
     return this.formatGoal(data[0]);
   }
 
@@ -145,6 +153,10 @@ class SavingsService {
 
     if (error) {
       throw new Error(`Failed to lock goal: ${error.message}`);
+    }
+
+    if (!data || !data[0]) {
+      throw new Error("Failed to lock goal: no data returned");
     }
 
     return this.formatGoal(data[0]);
@@ -180,6 +192,10 @@ class SavingsService {
       throw new Error(
         `Failed to create savings automation: ${error.message}`
       );
+    }
+
+    if (!data || !data[0]) {
+      throw new Error("Failed to create savings automation: no data returned");
     }
 
     return this.formatAutomation(data[0]);

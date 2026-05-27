@@ -61,6 +61,10 @@ class WalletService {
       throw new Error(`Failed to create wallet: ${error.message}`);
     }
 
+    if (!data || !data[0]) {
+      throw new Error("Failed to create wallet: no data returned");
+    }
+
     return this.formatWallet(data[0]);
   }
 
@@ -135,6 +139,10 @@ class WalletService {
 
     if (txnError) {
       throw new Error(`Failed to record transaction: ${txnError.message}`);
+    }
+
+    if (!txnData || !txnData[0]) {
+      throw new Error("Failed to record transaction: no data returned");
     }
 
     // Update wallet balance
@@ -215,6 +223,10 @@ class WalletService {
       throw new Error(`Failed to lock wallet: ${error.message}`);
     }
 
+    if (!data || !data[0]) {
+      throw new Error("Failed to lock wallet: no data returned");
+    }
+
     return this.formatWallet(data[0]);
   }
 
@@ -232,6 +244,10 @@ class WalletService {
 
     if (error) {
       throw new Error(`Failed to unlock wallet: ${error.message}`);
+    }
+
+    if (!data || !data[0]) {
+      throw new Error("Failed to unlock wallet: no data returned");
     }
 
     return this.formatWallet(data[0]);

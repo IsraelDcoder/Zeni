@@ -11,7 +11,7 @@
  * User → Mono/Okra SDK → Bank → Mono/Okra → Zeni Backend → Database
  */
 
-import { Router, Response } from "express";
+import { Router, Request, Response } from "express";
 import { z } from "zod";
 import { AuthRequest, authMiddleware } from "../middleware/auth.js";
 import { asyncHandler, ApiError } from "../middleware/errorHandler.js";
@@ -250,7 +250,7 @@ router.delete(
  */
 router.get(
   "/list",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req: Request, res: Response) => {
     const banks = await paystackService.getBanks();
     res.json({
       success: true,
@@ -266,7 +266,7 @@ router.get(
  */
 router.post(
   "/resolve",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req: Request, res: Response) => {
     const { account_number, bank_code } = req.body;
 
     const account = await paystackService.resolveAccount(

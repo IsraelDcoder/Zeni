@@ -1,10 +1,9 @@
 // Wallet Service: Manage user savings, wallet ledger, and transactions
 import { supabaseAdmin, supabaseClient } from "./supabase";
-import { Database } from "../types";
 
-type Wallet = Database["public"]["Tables"]["wallets"]["Row"];
-type WalletTransaction = Database["public"]["Tables"]["wallet_transactions"]["Row"];
-type SavingsGoal = Database["public"]["Tables"]["savings_goals"]["Row"];
+type Wallet = any;
+type WalletTransaction = any;
+type SavingsGoal = any;
 
 export class WalletService {
   /**
@@ -42,6 +41,10 @@ export class WalletService {
         throw new Error(`Failed to create wallet: ${createError.message}`);
       }
 
+      if (!newWallet) {
+        throw new Error("Failed to create wallet: returned data is null");
+      }
+
       return newWallet;
     } catch (error) {
       console.error("Error in getOrCreateWallet:", error);
@@ -62,6 +65,10 @@ export class WalletService {
 
       if (error) {
         throw new Error(`Failed to fetch wallet balance: ${error.message}`);
+      }
+
+      if (!data) {
+        throw new Error("Wallet balance data is null");
       }
 
       return data;
