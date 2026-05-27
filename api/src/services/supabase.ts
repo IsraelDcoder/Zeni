@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import ws from "ws";
 
 // Environment variables should already be loaded by server.ts
 // Get environment variables
@@ -14,10 +15,19 @@ if (!supabaseUrl || !supabaseAnonKey || !supabaseServiceRoleKey) {
   console.warn(`   SUPABASE_SERVICE_ROLE_KEY: ${supabaseServiceRoleKey ? "✓" : "✗"}`);
 }
 
+// Create clients with ws transport for Node.js 20 compatibility
 // Client for user operations (uses RLS)
-export const supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+export const supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+  realtime: {
+    transport: ws as any,
+  },
+});
 
 // Service role client for admin operations (bypasses RLS)
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
+export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
+  realtime: {
+    transport: ws as any,
+  },
+});
 
 export default supabaseClient;
