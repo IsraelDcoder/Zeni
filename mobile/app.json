@@ -1,8 +1,9 @@
 {
   "expo": {
     "name": "Zeni – AI Financial OS",
-    "slug": "mobile",
+    "slug": "zeni-mobile",
     "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "mobile",
@@ -14,10 +15,17 @@
       "backgroundColor": "#070D1A"
     },
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.zeni.mobile"
     },
     "android": {
-      "backgroundColor": "#070D1A"
+      "backgroundColor": "#070D1A",
+      "package": "com.zeni.mobile",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE"
+      ]
     },
     "web": {
       "favicon": "./assets/images/icon.png"
@@ -30,6 +38,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/[project-id]",
+      "enabled": false
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
   }
 }
